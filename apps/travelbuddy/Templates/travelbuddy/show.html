@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="x-UA-Compatible" content="ie=edge">
+  <title> Show </title>
+  {% load static %}
+  <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'travelbuddy/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="nav">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button type="button" class="btn btn-warning"><a href="{% url 'buddy:home'%}">Home Page</a></button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-warning"><a href="{% url 'login:logout'%}">Logout</a></button>
+      </li>
+  </div>
+
+  <div class="table">
+    <h2> Information About the Trip</h2>
+    <table>
+      <tr>
+        <th> Vacation Name:</th>
+        <th> Scheduled By: </th>
+        <th> Description </th>
+        <th> Travel Start Date: </th>
+        <th> Travel End Date: </th>
+      </tr>
+      <tr>
+        <td> {{userTrips.travel.destination}} </td>
+        <td> {{userTrips.user.name}} </td>
+        <td> {{userTrips.travel.schedule}} </td>
+        <td> {{userTrips.travel.start}} </td>
+        <td> {{userTrips.travel.end}} </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="otherpeople">
+  <h2>Other People joining this trip:</h2>      
+    {%for people in otherpeople %}  
+    <table>
+      <tr>
+          <th>Friend's Name:</th>
+      </tr>
+      <tr>
+        <td> {{people.user.name}}</td>
+      </tr>
+    </table>
+    {%endfor%}
+  </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="x-UA-Compatible" content="ie=edge">
+  <title> Home Page </title>
+  {% load static %}
+  <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'travelbuddy/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="nav">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button type="button" class="btn btn-warning"><a href="{% url 'buddy:schedule'%}">Add Trip</a></button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-warning"><a href="{% url 'login:logout'%}">Logout</a></button>
+      </li>
+  </div>
+
+  <h2>Hello, {{user.name}}!</h2>
+  <div class="validations">
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{message}}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <h3>Your Upcoming Trip Schedule: </h3>
+
+  <table>
+    <tr>
+      <th>Travel Destination</th>
+      <th>Travel Start Date</th>
+      <th>Travel End Date</th>
+      <th>Description</th>
+    </tr>
+
+    {%for travel in userTrips %}
+    <tr>
+      <td><a href="{% url 'buddy:reveal' travel.id %}">{{travel.destination}}</a></td>
+      <td>{{travel.start}}</td>
+      <td>{{travel.end}}</td>
+      <td>{{travel.schedule}}</td>     
+    </tr>
+    {%endfor%}
+   </table>
+
+  <h3>Friend's Travel Plans:</h3>
+
+  <table>
+    <tr>
+      <th>Travel Destination</th>
+      <th>Travel Start Date</th>
+      <th>Travel End Date</th>
+      <th>Click Below to Join</th>
+    </tr>
+
+    {%for t in totalTrips %}
+    <tr>
+      <td><a href="{% url 'buddy:reveal' t.id %}">{{t.destination}}</a></td>
+      <td>{{t.start}}</td>
+      <td>{{t.end}}</td>
+      <td><a href="{% url 'buddy:joinTrip' t.id %}">Join</a></td>     
+    </tr>
+    {%endfor%}
+
+   </table>
+   
+
+
+</body>
+</html>

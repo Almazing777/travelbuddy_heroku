@@ -1,0 +1,18 @@
+*{
+	padding: 5px;
+	margin: 5px;
+}
+
+table, th, td{
+	border: 2px solid black;
+	text-align: center;
+	width: 700px;
+}
+
+th{
+	background-color: #FDC66C;
+}
+
+td{
+	background-color: #F1F7F0;
+}

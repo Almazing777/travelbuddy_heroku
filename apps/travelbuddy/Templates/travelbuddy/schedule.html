@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="x-UA-Compatible" content="ie=edge">
+  <title> Add a trip </title>
+  {% load static %}
+  <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'travelbuddy/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="nav">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button type="button" class="btn btn-warning"><a href="{% url 'buddy:home'%}">Home Page</a></button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-warning"><a href="{% url 'login:logout'%}">Logout</a></button>
+      </li>
+  </div>
+
+  <h1>Add a Trip</h1>
+  <div class="validations">
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{message}}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <form action="createTrip" method="post">
+  {% csrf_token %}
+  <div> 
+    <label for="destination"> Destination: </label>
+    <input type="text" name="destination" id="destination" required>
+  </div>
+
+  <div>
+    <label for="description"> Description: </label>
+    <input type="text" name="description" id="description" required>
+  </div>
+
+  <div>
+    <label for="startdate"> Travel Start Date: </label>
+    <input type="date" name="start" id="start" required>
+  </div>
+
+  <div>
+    <label for="enddate"> Travel End Date: </label>
+    <input type="date" name="end" id="end" required>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Create Trip </button>
+  </form>
+</body>
+</html>

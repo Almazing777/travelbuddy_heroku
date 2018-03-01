@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="x-UA-Compatible" content="ie=edge">
+  <title> Login and Registration </title>
+  {% load static %}
+  <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'loginreg/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body> 
+<div class="validations">
+  {{success}}
+  {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+<div class="container">
+  <div class="col-md-3 text-center"></div>
+  <h3>Welcome to Login and Registration!</h3> 
+  <form action='/register' method='POST'>
+    {% csrf_token %}
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+    </div>
+
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" name="user_name" id="user_name" required>
+    </div>
+
+    <div>
+      <label for="password"> Password: </label>
+      <input type="password" name="password" id="password" required>
+    </div>
+
+    <div>
+      <label for="confirm_password"> Password Confirmation:</label>
+      <input type="password" name="password_confirm" id="password_confirm" required>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">Register</button>
+  </form>
+  
+  <hr>
+
+  <form action="login" method='POST'>
+    {% csrf_token %}
+
+    <div> 
+      <label for="username"> Username: </label>
+      <input type="text" name="user_name" id="user_name" required>
+    </div>
+
+    <div>
+      <label for="password"> Password: </label>
+      <input type="password" name="password" id="password" required>
+    </div>
+
+      <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+</div>
+</body>
+</html>
